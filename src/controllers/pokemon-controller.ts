@@ -23,9 +23,9 @@ export class PokemonController {
   }
 
   // aqui faz a busca do pokemon pelo
-  getPokemonbyName(req: Request, res: Response) {
+  async getPokemonbyName(req: Request, res: Response) {
     const { nome } = req.params;
-    const pokemon = this.pokemonRepository.findByname(nome);
+    const pokemon = await this.pokemonRepository.findByname(nome);
     if (!pokemon) {
       res.status(404).json({
         mensagem: 'pokemon não encontrado',
@@ -67,8 +67,8 @@ export class PokemonController {
   }
 
   // lista os pokemons
-  getAll(req: Request, res: Response) {
-    const pokemon = this.pokemonRepository.findAll();
+  async getAll(req: Request, res: Response) {
+    const pokemon = await this.pokemonRepository.findAll();
     return res.status(200).json(pokemon);
   }
 }
