@@ -23,7 +23,7 @@ export class PokemonController {
   }
 
   // aqui faz a busca do pokemon pelo
-  async getPokemonbyName(req: Request, res: Response) {
+  async getPokemonByName(req: Request, res: Response) {
     const { nome } = req.params;
     const pokemon = await this.pokemonRepository.findByname(nome);
     if (!pokemon) {
@@ -40,29 +40,29 @@ export class PokemonController {
   }
 
   // aqui será feito o update do pokemon selecioando
-  updatePokemon(req: Request, res: Response) {
-    const { nome } = req.params;
+  async updatePokemon(req: Request, res: Response) {
+    const { id } = req.params;
     const { nivel } = req.body;
-    const pokemon = this.pokemonRepository.findByname(nome);
+    const pokemon = await this.pokemonRepository.findById(Number(id));
     if (!pokemon) {
       res.status(404).json({
         mensagem: 'pokemon não encontrado',
       });
     }
-    this.pokemonRepository.updateLevel(nome, nivel);
+    this.pokemonRepository.updateLevel(Number(id), nivel);
     return res.status(204).send();
   }
 
   // aqui deçeta o pokemon selecionado
-  deletePokemon(req: Request, res: Response) {
-    const { nome } = req.params;
-    const pokemon = this.pokemonRepository.findByname(nome);
+  async deletePokemon(req: Request, res: Response) {
+    const { id } = req.params;
+    const pokemon = await this.pokemonRepository.findById(Number(id));
     if (!pokemon) {
       res.status(404).json({
         mensagem: 'pokemon não encontrado',
       });
     }
-    this.pokemonRepository.remove(nome);
+    await this.pokemonRepository.remove(Number(id));
     return res.status(204).send();
   }
 

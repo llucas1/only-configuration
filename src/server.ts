@@ -10,14 +10,14 @@ app.post('/pokemon', async (req, res) =>
 );
 // rota do pokemon que busca pelo nome
 app.get('/pokemon/:nome', async (req, res) =>
-  pokemonController.getPokemonbyName(req, res),
+  pokemonController.getPokemonByName(req, res),
 );
 // aqui é rota do upadte dos pokemons
-app.patch('/pokemon/:nome', (req, res) =>
+app.patch('/pokemon/:id', (req, res) =>
   pokemonController.updatePokemon(req, res),
 );
 // aqui deleta os pokemons
-app.delete('/pokemon/:nome', (req, res) =>
+app.delete('/pokemon/:id', async (req, res) =>
   pokemonController.deletePokemon(req, res),
 );
 // listar pokemons
