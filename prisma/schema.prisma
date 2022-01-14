@@ -7,9 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model pokemon {
+model locadora {
   id    Int     @id
   name  String
-  level Int
-  type  String
+  data_cpf String
+  move  String
 }

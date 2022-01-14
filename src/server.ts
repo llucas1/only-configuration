@@ -1,27 +1,27 @@
 import express from 'express';
-import { PokemonController } from './controllers/pokemon-controller';
+import { LocadoraController } from './controllers/locadora-controller';
 
 const app = express();
 app.use(express.json());
-const pokemonController = new PokemonController();
+const locadoraController = new LocadoraController();
 // rota para criar o pokemon
-app.post('/pokemon', async (req, res) =>
-  pokemonController.createPokemon(req, res),
+app.post('/locadora', async (req, res) =>
+  locadoraController.createLocadora(req, res),
 );
 // rota do pokemon que busca pelo nome
-app.get('/pokemon/:nome', async (req, res) =>
-  pokemonController.getPokemonByName(req, res),
+app.get('/locadora/:nome', async (req, res) =>
+  locadoraController.getLocadoraByName(req, res),
 );
 // aqui é rota do upadte dos pokemons
-app.patch('/pokemon/:id', (req, res) =>
-  pokemonController.updatePokemon(req, res),
+app.patch('/locadora/:id', (req, res) =>
+  locadoraController.updateLocadora(req, res),
 );
 // aqui deleta os pokemons
-app.delete('/pokemon/:id', async (req, res) =>
-  pokemonController.deletePokemon(req, res),
+app.delete('/locadora/:id', async (req, res) =>
+  locadoraController.deleteLocadora(req, res),
 );
-// listar pokemons
-app.get('/pokemon', async (req, res) => pokemonController.getAll(req, res));
+// listar filmes
+app.get('/locadora', async (req, res) => locadoraController.getAll(req, res));
 
 app.listen(3000, () => {
   console.log('servidor inciado na porta 3000');
